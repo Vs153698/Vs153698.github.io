@@ -8,9 +8,9 @@ const space = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "CodeNiti — Websites, Apps & AI Agents that sell 24/7",
+  title: "WebKraft — Websites, Apps & AI Agents that sell 24/7",
   description:
-    "CodeNiti is a software lab shipping websites, platforms and AI agents for businesses in India & Australia. Real systems, real clients, no templates.",
+    "WebKraft is a software lab shipping websites, platforms and AI agents for businesses in India & Australia. Real systems, real clients, no templates.",
 };
 
 export const viewport: Viewport = {

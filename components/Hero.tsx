@@ -1,5 +1,5 @@
 import { Reveal } from "./Reveal";
-import { ArrowDoodle, CircleScribble, StampBadge, Starburst } from "./Doodles";
+import { ArrowDoodle, StampBadge, Starburst } from "./Doodles";
 
 export function Hero() {
   return (
@@ -26,17 +26,13 @@ export function Hero() {
             </span>{" "}
             that
             <br />
-            sell{" "}
-            <span className="relative inline-block">
-              <span className="hl hl-purple">24/7.</span>
-              <CircleScribble className="absolute -inset-x-8 -inset-y-4 w-[calc(100%+4rem)] text-ink" />
-            </span>
+            sell <span className="hl hl-purple">24/7.</span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.1}>
           <p className="mt-10 max-w-xl text-lg leading-snug font-medium sm:text-xl">
-            CodeNiti is a small software lab shipping websites, platforms and AI
+            WebKraft is a small software lab shipping websites, platforms and AI
             agents for businesses in India &amp; Australia. Real systems. Real
             clients. No templates.
           </p>

@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="border-t-[3px] border-ink bg-yellow px-5 py-7">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-sm font-medium sm:flex-row">
-        <span className="font-bold">© {company.year} CODENITI</span>
+        <span className="font-bold">© {company.year} WEBKRAFT</span>
         <div className="flex items-center gap-6">
           <a
             href={company.github}

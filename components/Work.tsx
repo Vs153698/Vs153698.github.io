@@ -1,7 +1,6 @@
 import { ArrowUpRight, Lock } from "lucide-react";
 import { projects } from "@/lib/data";
 import { Reveal } from "./Reveal";
-import { Scribble } from "./Doodles";
 
 function Shot({ img, host }: { img: string; host: string }) {
   return (
@@ -40,9 +39,8 @@ export function Work() {
           <span className="hl hl-purple -rotate-2 text-[13px] font-bold tracking-wide uppercase">
             Selected work
           </span>
-          <h2 className="relative mt-6 inline-block text-4xl font-bold tracking-tight uppercase sm:text-6xl">
+          <h2 className="mt-6 text-4xl font-bold tracking-tight uppercase sm:text-6xl">
             Proof, not promises
-            <Scribble className="absolute -bottom-4 left-0 w-56 text-red sm:w-80" />
           </h2>
           <p className="mt-8 max-w-lg text-base leading-snug font-medium text-fog sm:text-lg">
             Every project below is live right now. Click any card — it opens

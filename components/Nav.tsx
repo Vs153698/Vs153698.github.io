@@ -12,7 +12,7 @@ export function Nav() {
           href="#top"
           className="text-xl font-bold tracking-tight"
         >
-          CODENITI<span className="text-red">*</span>
+          WEBKRAFT<span className="text-red">*</span>
         </a>
 
         <div className="hidden items-center gap-7 text-[15px] font-medium md:flex">

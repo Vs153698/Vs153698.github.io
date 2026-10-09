@@ -84,8 +84,8 @@ export function StampBadge({ className = "" }: { className?: string }) {
       </defs>
       <circle cx="80" cy="80" r="76" fill="var(--color-yellow)" stroke="var(--color-ink)" strokeWidth="4" />
       <circle cx="80" cy="80" r="44" fill="none" stroke="var(--color-ink)" strokeWidth="3" strokeDasharray="6 6" />
-      <text fontSize="15.5" fontWeight="700" letterSpacing="2.5" fill="var(--color-ink)">
-        <textPath href="#stampCircle">★ CODENITI ★ REAL PROJECTS ★ NO TEMPLATES</textPath>
+      <text fontSize="16" fontWeight="700" letterSpacing="3" fill="var(--color-ink)">
+        <textPath href="#stampCircle">★ WEBKRAFT ★ REAL PROJECTS ★ NO TEMPLATES</textPath>
       </text>
       <text x="80" y="89" textAnchor="middle" fontSize="26" fontWeight="700" fill="var(--color-ink)">EST.</text>
       <text x="80" y="112" textAnchor="middle" fontSize="17" fontWeight="700" fill="var(--color-red)">2021</text>

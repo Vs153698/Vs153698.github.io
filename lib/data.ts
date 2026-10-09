@@ -1,6 +1,6 @@
 export const company = {
-  name: "CodeNiti",
-  email: "hello@codeniti.in", // PLACEHOLDER — confirm/replace
+  name: "WebKraft",
+  email: "hello@webkraft.in", // PLACEHOLDER — confirm/replace
   github: "https://github.com/Vs153698",
   x: "https://x.com/vs153698",
   telegramBot: "https://t.me/Kimiv_bot",
