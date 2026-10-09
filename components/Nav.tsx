@@ -1,39 +1,36 @@
 import { company } from "@/lib/data";
 
 const links = [
-  { href: "#work", label: "Work" },
   { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export function Nav() {
   return (
-    <header className="fixed inset-x-0 top-4 z-40 flex justify-center px-4">
-      <nav className="glass-strong flex w-full max-w-3xl items-center justify-between rounded-full py-2 pr-2 pl-5 shadow-glow">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-white/80 backdrop-blur-md">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <a href="#top" className="flex items-center gap-2.5">
-          <span
-            className="flex size-7 items-center justify-center rounded-lg text-xs font-bold text-white"
-            style={{ background: "linear-gradient(135deg,#8b5cf6,#06b6d4)" }}
-          >
+          <span className="flex size-8 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white">
             CN
           </span>
-          <span className="text-sm font-semibold tracking-tight">
+          <span className="text-[15px] font-bold tracking-tight">
             {company.name}
           </span>
         </a>
 
-        <div className="hidden items-center gap-6 text-sm text-fog md:flex">
+        <div className="hidden items-center gap-8 text-sm text-fog md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="transition hover:text-white">
+            <a key={l.href} href={l.href} className="transition hover:text-ink">
               {l.label}
             </a>
           ))}
         </div>
 
         <a
-          href={`mailto:${company.email}`}
-          className="rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-black transition hover:opacity-85"
+          href="#contact"
+          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-deep"
         >
           Start a project
         </a>

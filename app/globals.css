@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #08070c;
-  --color-panel: #100e17;
-  --color-line: rgba(255, 255, 255, 0.08);
-  --color-line-bright: rgba(255, 255, 255, 0.16);
-  --color-fog: #a1a1b3;
+  --color-paper: #ffffff;
+  --color-mist: #f6f7f9;
+  --color-line: #e7e9ee;
+  --color-line-bright: #d4d8e0;
+  --color-ink: #0b0d12;
+  --color-fog: #5b6472;
+  --color-accent: #2563eb;
+  --color-accent-deep: #1d4ed8;
+  --color-accent-soft: #eff4ff;
   --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 }
@@ -15,90 +19,58 @@ html {
 }
 
 body {
-  background: var(--color-ink);
-  color: #eceaf2;
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(167, 139, 250, 0.4);
-  color: #fff;
+  background: rgba(37, 99, 235, 0.16);
 }
 
-.text-gradient {
-  background: linear-gradient(92deg, #c7b8ff 0%, #93c5fd 45%, #6ee7b7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.04);
+/* light card */
+.card-l {
+  background: #fff;
   border: 1px solid var(--color-line);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1.25rem;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
-
-.glass-strong {
-  background: rgba(16, 14, 23, 0.72);
-  border: 1px solid var(--color-line);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.shadow-glow {
-  box-shadow: 0 10px 50px -12px rgba(139, 92, 246, 0.35);
-}
-
-.card-hover {
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.card-hover:hover {
-  transform: translateY(-4px);
+.card-l:hover {
   border-color: var(--color-line-bright);
-  box-shadow: 0 18px 50px -18px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 12px 32px -16px rgba(11, 13, 18, 0.14);
+  transform: translateY(-2px);
 }
 
-/* floating orbs */
-@keyframes drift1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(70px, -50px) scale(1.15); }
+/* icon chip — solid, no gradient */
+.chip {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  flex-shrink: 0;
 }
-@keyframes drift2 {
-  0%, 100% { transform: translate(0, 0) scale(1.1); }
-  50% { transform: translate(-60px, 60px) scale(0.95); }
-}
-@keyframes drift3 {
-  0%, 100% { transform: translate(0, 0) scale(0.95); }
-  50% { transform: translate(40px, 70px) scale(1.12); }
-}
-.orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(100px);
-  pointer-events: none;
-}
-.orb-1 { animation: drift1 18s ease-in-out infinite; }
-.orb-2 { animation: drift2 22s ease-in-out infinite; }
-.orb-3 { animation: drift3 26s ease-in-out infinite; }
 
+/* client logo marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee 36s linear infinite;
 }
 
-/* gradient icon tiles */
-.tile {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  flex-shrink: 0;
+/* subtle grid backdrop for hero */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(11, 13, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 13, 18, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 0%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 0%, black 30%, transparent 75%);
 }
