@@ -1,14 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #060807;
-  --color-panel: #0a0d0b;
-  --color-line: rgba(74, 222, 128, 0.14);
-  --color-line-dim: rgba(255, 255, 255, 0.07);
-  --color-phos: #34d399;
-  --color-phos-bright: #6ee7b7;
-  --color-amber: #fbbf24;
-  --color-fog: #8a9a90;
+  --color-ink: #08070c;
+  --color-panel: #100e17;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-bright: rgba(255, 255, 255, 0.16);
+  --color-fog: #a1a1b3;
+  --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 }
 
@@ -18,79 +16,73 @@ html {
 
 body {
   background: var(--color-ink);
-  color: #d7e4dc;
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  color: #eceaf2;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: var(--color-phos);
-  color: #04120b;
+  background: rgba(167, 139, 250, 0.4);
+  color: #fff;
 }
 
-/* dotted measurement grid */
-.dot-grid {
-  background-image: radial-gradient(rgba(110, 231, 183, 0.09) 1px, transparent 1px);
-  background-size: 28px 28px;
+.text-gradient {
+  background: linear-gradient(92deg, #c7b8ff 0%, #93c5fd 45%, #6ee7b7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* CRT scanlines */
-.scanlines::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 40;
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-strong {
+  background: rgba(16, 14, 23, 0.72);
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.shadow-glow {
+  box-shadow: 0 10px 50px -12px rgba(139, 92, 246, 0.35);
+}
+
+.card-hover {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-line-bright);
+  box-shadow: 0 18px 50px -18px rgba(139, 92, 246, 0.4);
+}
+
+/* floating orbs */
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(70px, -50px) scale(1.15); }
+}
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-60px, 60px) scale(0.95); }
+}
+@keyframes drift3 {
+  0%, 100% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(40px, 70px) scale(1.12); }
+}
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
   pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 2px,
-    rgba(0, 0, 0, 0.14) 3px,
-    transparent 4px
-  );
-  opacity: 0.5;
 }
+.orb-1 { animation: drift1 18s ease-in-out infinite; }
+.orb-2 { animation: drift2 22s ease-in-out infinite; }
+.orb-3 { animation: drift3 26s ease-in-out infinite; }
 
-/* phosphor glow text */
-.glow {
-  text-shadow: 0 0 14px rgba(52, 211, 153, 0.45);
-}
-.glow-strong {
-  text-shadow: 0 0 22px rgba(52, 211, 153, 0.65);
-}
-
-/* blinking block cursor */
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-.blink {
-  animation: blink 1.1s step-end infinite;
-}
-
-/* terminal row hover: phosphor invert */
-.term-row {
-  transition: background 0.18s ease, color 0.18s ease;
-}
-.term-row:hover {
-  background: rgba(52, 211, 153, 0.1);
-  color: var(--color-phos-bright);
-}
-.term-row:hover .row-dim {
-  color: rgba(110, 231, 183, 0.75);
-}
-
-/* hard invert button */
-.inv-btn {
-  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
-}
-.inv-btn:hover {
-  background: var(--color-phos);
-  color: #04120b;
-  box-shadow: 0 0 24px rgba(52, 211, 153, 0.4);
-}
-
-/* marquee ticker */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -99,23 +91,14 @@ body {
   animation: marquee 40s linear infinite;
 }
 
-/* corner ticks for panels */
-.tick-corners {
-  position: relative;
-}
-.tick-corners::before,
-.tick-corners::after {
-  content: "+";
-  position: absolute;
-  color: rgba(110, 231, 183, 0.5);
-  font-size: 12px;
-  line-height: 1;
-}
-.tick-corners::before {
-  top: -7px;
-  left: -5px;
-}
-.tick-corners::after {
-  bottom: -7px;
-  right: -5px;
+/* gradient icon tiles */
+.tile {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
 }

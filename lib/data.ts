@@ -9,17 +9,18 @@ export const company = {
   x: "https://x.com/vs153698",
   telegramBot: "https://t.me/Kimiv_bot",
   since: 2021,
-  // pinned at build time — static export can't read the clock at prerender
   year: 2026,
 };
 
 export type Project = {
-  name: string; // display name
-  host: string; // domain shown
+  name: string;
+  host: string;
   desc: string;
   stack: string;
-  url: string; // live site
-  tag: string; // sector
+  url: string;
+  tag: string;
+  img: string; // /work/*.jpg screenshot
+  tile: string; // gradient for tag chip
 };
 
 export const projects: Project[] = [
@@ -27,112 +28,113 @@ export const projects: Project[] = [
     name: "National Book of Records",
     host: "nationalbookofrecords.org",
     desc: "India's official record authority — applications, payments, certified records.",
-    stack: "NEXT.JS · TS · PAYMENTS",
+    stack: "Next.js · TypeScript",
     url: "https://nationalbookofrecords.org/",
-    tag: "PORTAL",
+    tag: "Portal",
+    img: "/work/nbr.jpg",
+    tile: "linear-gradient(135deg,#8b5cf6,#ec4899)",
   },
   {
     name: "NBR CRM",
     host: "crm.codeniti.in",
     desc: "Internal operations CRM — workflows, integrations, document vault.",
-    stack: "NESTJS · TS · POSTGRESQL",
+    stack: "NestJS · PostgreSQL",
     url: "https://crm.codeniti.in/login",
     tag: "CRM",
+    img: "/work/nbrcrm.jpg",
+    tile: "linear-gradient(135deg,#06b6d4,#3b82f6)",
   },
   {
     name: "ProSportsData.ai",
     host: "prosportsdata.ai",
     desc: "Multi-sport AI intelligence platform — early access live.",
-    stack: "AI · LLM · DATA PIPELINES",
+    stack: "AI · LLM Pipelines",
     url: "https://prosportsdata.ai/",
-    tag: "AI PRODUCT",
+    tag: "AI Product",
+    img: "/work/psd.jpg",
+    tile: "linear-gradient(135deg,#10b981,#84cc16)",
   },
   {
     name: "Willsmeet",
     host: "willsmeet.com",
     desc: "B2B procurement — 3000+ products, data-driven logistics, 24/7 delivery.",
-    stack: "NEXT.JS · COMMERCE",
+    stack: "Next.js · Commerce",
     url: "https://willsmeet.com/",
-    tag: "PLATFORM",
+    tag: "Platform",
+    img: "/work/willsmeet.jpg",
+    tile: "linear-gradient(135deg,#f59e0b,#ef4444)",
   },
   {
     name: "Chennai Bulls Rugby",
     host: "chennaibullsrugby.com",
     desc: "Official club site — men's & women's premier league teams.",
-    stack: "WEB · CMS",
+    stack: "Web · CMS",
     url: "https://chennaibullsrugby.com/",
-    tag: "SPORTS",
+    tag: "Sports",
+    img: "/work/bulls.jpg",
+    tile: "linear-gradient(135deg,#ec4899,#f43f5e)",
   },
   {
     name: "HommCorp Australia",
     host: "hommcorp.com.au",
     desc: "Melbourne service booking — moving, cleaning, gardening, junk removal.",
-    stack: "BOOKING · TS · PAYMENTS",
+    stack: "Booking · Payments",
     url: "https://hommcorp.com.au/",
-    tag: "BOOKING",
+    tag: "Booking",
+    img: "/work/homm.jpg",
+    tile: "linear-gradient(135deg,#3b82f6,#8b5cf6)",
   },
 ];
 
 export const services = [
   {
     title: "AI Agents & Products",
-    desc: "Autonomous agents and AI platforms — from sports intelligence to WhatsApp/Telegram bots that close tickets and chase documents.",
-    tags: ["LLM", "AGENTS", "AUTOMATION"],
+    desc: "Autonomous agents and AI platforms — from sports intelligence to support bots that close tickets and chase documents.",
+    tags: ["LLM", "Agents", "Automation"],
+    icon: "Bot",
+    tile: "linear-gradient(135deg,#8b5cf6,#6366f1)",
     big: true,
   },
   {
     title: "Web Platforms & Portals",
-    desc: "Public-facing platforms with applications, payments and certificates — built to carry real institutional load.",
-    tags: ["NEXT.JS", "PAYMENTS"],
+    desc: "Public-facing platforms with applications, payments and certificates — built for real institutional load.",
+    tags: ["Next.js", "Payments"],
+    icon: "Globe",
+    tile: "linear-gradient(135deg,#06b6d4,#3b82f6)",
   },
   {
     title: "CRM & Internal Systems",
     desc: "The operations backbone: pipelines, document vaults, role-based workflows your team actually uses.",
-    tags: ["NESTJS", "POSTGRESQL"],
+    tags: ["NestJS", "PostgreSQL"],
+    icon: "Database",
+    tile: "linear-gradient(135deg,#10b981,#14b8a6)",
   },
   {
     title: "Booking & Service Platforms",
     desc: "Instant estimates, GST-aware invoicing, crew dispatch — service businesses end to end.",
-    tags: ["BOOKING", "DISPATCH"],
+    tags: ["Booking", "Dispatch"],
+    icon: "CalendarClock",
+    tile: "linear-gradient(135deg,#f59e0b,#f97316)",
   },
   {
     title: "Commerce & Procurement",
     desc: "Catalogs, ordering flows and logistics views for B2B trade.",
-    tags: ["B2B", "LOGISTICS"],
+    tags: ["B2B", "Logistics"],
+    icon: "ShoppingCart",
+    tile: "linear-gradient(135deg,#ec4899,#f43f5e)",
   },
   {
     title: "Website Rescue & Redesign",
     desc: "Legacy sites rebuilt into fast, mobile-first systems that turn visitors into enquiries.",
-    tags: ["MIGRATION", "SEO-SAFE"],
+    tags: ["Migration", "SEO-safe"],
+    icon: "Paintbrush",
+    tile: "linear-gradient(135deg,#84cc16,#22c55e)",
   },
 ];
 
 export const stats = [
-  { value: 6, suffix: "+", label: "PRODUCTION SYSTEMS" },
-  { value: 5, suffix: "", label: "INDUSTRY SECTORS" },
-  { value: 2, suffix: "", label: "COUNTRIES — IN · AU" },
-  { value: 5, suffix: "+", label: "YEARS OPERATION" },
-];
-
-export const log = [
-  {
-    t: "2021.06",
-    tag: "BOOT",
-    text: "CodeNiti founded in Kota. Python automation and tooling.",
-  },
-  {
-    t: "2023",
-    tag: "EXPAND",
-    text: "Full-stack practice: TypeScript, Next.js, production client platforms.",
-  },
-  {
-    t: "2025",
-    tag: "DEPLOY",
-    text: "National Book of Records portal + CRM, Willsmeet, Chennai Bulls, HommCorp AU live.",
-  },
-  {
-    t: "2026",
-    tag: "AGENTS",
-    text: "AI product line: ProSportsData.ai in early access. Agent-driven support ops.",
-  },
+  { value: 6, suffix: "+", label: "Production systems" },
+  { value: 5, suffix: "", label: "Industry sectors" },
+  { value: 2, suffix: "", label: "Countries — IN · AU" },
+  { value: 5, suffix: "+", label: "Years operating" },
 ];

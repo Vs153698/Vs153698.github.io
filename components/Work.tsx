@@ -6,58 +6,61 @@ export function Work() {
   return (
     <section id="work" className="mx-auto max-w-6xl px-5 py-28">
       <Reveal>
-        <div className="flex items-center gap-4 text-[11px] tracking-[0.3em] text-fog">
-          <span className="text-phos">[ 02 ]</span> DEPLOYED SYSTEMS
-          <span className="h-px flex-1 bg-line-dim" />
-          <span className="hidden sm:inline">ALL LIVE IN PRODUCTION</span>
-        </div>
-        <h2 className="glow mt-8 max-w-2xl text-3xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
-          SHIPPED & RUNNING<span className="text-phos">.</span>
+        <p className="text-sm font-semibold text-violet-300">Selected work</p>
+        <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">
+          Shipped & <span className="text-gradient">running.</span>
         </h2>
-        <p className="mt-4 max-w-xl text-xs leading-relaxed text-fog">
-          {`// not mockups. click any row to open the live system →`}
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-fog">
+          Not mockups — every system below is live in production. Click any card
+          to open the real site.
         </p>
       </Reveal>
 
-      <Reveal delay={0.1}>
-        <div className="mt-12 border border-line bg-panel/60">
-          <div className="hidden grid-cols-[70px_1.1fr_1.6fr_150px_90px_30px] gap-4 border-b border-line px-5 py-2.5 text-[10px] tracking-[0.25em] text-fog lg:grid">
-            <span>REF</span>
-            <span>SYSTEM</span>
-            <span>FUNCTION</span>
-            <span>STACK</span>
-            <span>SECTOR</span>
-            <span />
-          </div>
-          {projects.map((p, i) => (
+      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p, i) => (
+          <Reveal key={p.name} delay={(i % 3) * 0.08}>
             <a
-              key={p.name}
               href={p.url}
               target="_blank"
               rel="noreferrer"
-              className="term-row group grid grid-cols-[1fr_auto] items-center gap-2 border-b border-line-dim px-5 py-5 last:border-0 lg:grid-cols-[70px_1.1fr_1.6fr_150px_90px_30px] lg:gap-4"
+              className="glass card-hover group block overflow-hidden rounded-3xl"
             >
-              <span className="hidden text-xs text-phos lg:block">
-                S-{String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="font-mono text-sm font-bold text-zinc-100 group-hover:text-phos-bright">
-                {p.name}
-                <span className="row-dim mt-0.5 block text-[10px] font-normal text-fog">
-                  {p.host}
+              {/* live screenshot */}
+              <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-panel">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={p.img}
+                  alt={`${p.name} screenshot`}
+                  className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <span className="absolute top-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-semibold tracking-wider text-white backdrop-blur">
+                  {p.tag.toUpperCase()}
                 </span>
-              </span>
-              <span className="row-dim col-span-2 text-xs leading-relaxed text-fog lg:col-span-1">
-                {p.desc}
-              </span>
-              <span className="hidden text-[11px] text-fog lg:block">{p.stack}</span>
-              <span className="hidden text-[11px] text-phos-bright/70 lg:block">
-                [{p.tag}]
-              </span>
-              <ArrowUpRight className="size-4 justify-self-end text-phos opacity-0 transition-opacity group-hover:opacity-100" />
+                <span className="absolute top-3 right-3 flex size-8 items-center justify-center rounded-full bg-white text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <ArrowUpRight className="size-4" />
+                </span>
+              </div>
+
+              <div className="p-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base font-semibold tracking-tight group-hover:text-violet-200">
+                    {p.name}
+                  </h3>
+                  <span
+                    className="size-2.5 rounded-full"
+                    style={{ background: p.tile }}
+                  />
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-fog">{p.desc}</p>
+                <div className="mt-4 flex items-center justify-between text-xs text-fog">
+                  <span>{p.stack}</span>
+                  <span className="opacity-70">{p.host}</span>
+                </div>
+              </div>
             </a>
-          ))}
-        </div>
-      </Reveal>
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }

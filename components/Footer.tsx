@@ -2,15 +2,35 @@ import { company } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line-dim bg-panel/60">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-[10px] tracking-[0.2em] text-fog sm:flex-row">
-        <span>© {company.year} {company.name.toUpperCase()} — ALL SYSTEMS RESERVED</span>
+    <footer className="border-t border-line bg-panel/60">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-fog sm:flex-row">
         <span>
-          KOTA, IN — 25.2138°N 75.8640°E · BUILD {company.year}.10.09
+          © {company.year} {company.name} · Kota, India
         </span>
-        <span className="text-phos">
-          EXIT CODE 0 <span className="blink">▊</span>
-        </span>
+        <div className="flex items-center gap-5">
+          <a
+            href={company.github}
+            target="_blank"
+            rel="noreferrer"
+            className="transition hover:text-white"
+          >
+            GitHub
+          </a>
+          <a
+            href={company.x}
+            target="_blank"
+            rel="noreferrer"
+            className="transition hover:text-white"
+          >
+            X
+          </a>
+          <a
+            href={`mailto:${company.email}`}
+            className="transition hover:text-white"
+          >
+            Email
+          </a>
+        </div>
       </div>
     </footer>
   );
