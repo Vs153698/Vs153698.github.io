@@ -20,6 +20,7 @@ export type Project = {
   year: string;
   url: string;
   tag: string;
+  tile: string; // gradient tile class
 };
 
 export const projects: Project[] = [
@@ -30,30 +31,34 @@ export const projects: Project[] = [
     year: "2026",
     url: "https://github.com/Vs153698/moments",
     tag: "Platform",
+    tile: "tile-violet",
   },
   {
     name: "nbr-crm",
-    desc: "CRM system for National Book of Records — workflow engine, integrations, document vault.",
+    desc: "CRM for National Book of Records — workflows, integrations, document vault.",
     lang: "TypeScript",
     year: "2026",
     url: "https://github.com/Vs153698/nbr-crm",
     tag: "Business system",
+    tile: "tile-cyan",
   },
   {
     name: "hommcorp-platform",
-    desc: "Multi-service booking platform for Australia — moving, cleaning, gardening, junk removal.",
+    desc: "Multi-service booking platform for Australia — moving, cleaning, junk removal.",
     lang: "TypeScript",
     year: "2026",
     url: "https://github.com/Vs153698/hommcorp-platform",
     tag: "Booking",
+    tile: "tile-green",
   },
   {
     name: "Jarvis",
-    desc: "Personal AI assistant — automation and tooling experiments in Python.",
+    desc: "Personal AI assistant — automation and agent tooling experiments in Python.",
     lang: "Python",
     year: "2026",
     url: "https://github.com/Vs153698/Jarvis",
     tag: "AI agent",
+    tile: "tile-pink",
   },
   {
     name: "trailmesh",
@@ -62,6 +67,7 @@ export const projects: Project[] = [
     year: "2026",
     url: "https://github.com/Vs153698/trailmesh",
     tag: "Realtime",
+    tile: "tile-amber",
   },
   {
     name: "nationalbookofrecord",
@@ -70,6 +76,7 @@ export const projects: Project[] = [
     year: "2026",
     url: "https://github.com/Vs153698/nationalbookofrecord",
     tag: "Web app",
+    tile: "tile-blue",
   },
 ];
 
@@ -79,43 +86,56 @@ export const services = [
     title: "AI Agents & Automation",
     desc: "Custom agents that qualify leads, chase documents, answer customers and run your back-office — wired into WhatsApp, Telegram, email and your CRM.",
     tags: ["LLM workflows", "Tool use", "Chatbots"],
+    tile: "tile-violet",
     big: true,
   },
   {
     icon: "Globe",
     title: "Web Development",
-    desc: "Fast, conversion-focused sites and apps in Next.js and React — built to score green on Core Web Vitals.",
+    desc: "Fast, conversion-focused sites and apps in Next.js and React — green Core Web Vitals out of the box.",
     tags: ["Next.js", "React", "TypeScript"],
+    tile: "tile-cyan",
   },
   {
     icon: "RefreshCw",
     title: "Website Redesign",
     desc: "Legacy sites rebuilt into modern, mobile-first experiences that turn visitors into enquiries.",
     tags: ["Migration", "SEO-safe", "Performance"],
+    tile: "tile-pink",
   },
   {
     icon: "Database",
     title: "CRM & Business Systems",
-    desc: "Internal tools, dashboards, pipelines and record systems tailored to how your team actually works.",
+    desc: "Internal tools, dashboards, pipelines and record systems tailored to how your team works.",
     tags: ["NestJS", "PostgreSQL", "Dashboards"],
+    tile: "tile-amber",
   },
   {
     icon: "CalendarCheck",
     title: "Booking & E-commerce",
-    desc: "Reservation flows, payments, dispatch and order management — from a single booking page to full platforms.",
-    tags: ["Payments", "Booking flows", "Multi-service"],
+    desc: "Reservation flows, payments, dispatch and order management — one page to full platforms.",
+    tags: ["Payments", "Booking flows"],
+    tile: "tile-green",
   },
   {
     icon: "Terminal",
     title: "APIs & Integrations",
-    desc: "Payment gateways, WhatsApp, telephony, shipping — the plumbing that makes business software feel effortless.",
-    tags: ["REST", "Webhooks", "Third-party APIs"],
+    desc: "Payment gateways, WhatsApp, telephony, shipping — plumbing that makes software effortless.",
+    tags: ["REST", "Webhooks", "APIs"],
+    tile: "tile-blue",
   },
 ];
 
+export const stats = [
+  { value: 45, suffix: "+", label: "Public repositories" },
+  { value: 5, suffix: "+", label: "Years shipping code" },
+  { value: 8, suffix: "+", label: "Platforms & products" },
+  { value: 2, suffix: "", label: "Markets — India & Australia" },
+];
+
 export const stackGroups = [
-  { label: "Frontend", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vite"] },
-  { label: "Backend", items: ["Node.js", "NestJS", "Fastify", "Python", "PostgreSQL", "Redis"] },
-  { label: "AI & Agents", items: ["LLM APIs", "Agent workflows", "RAG", "Automation", "Telegram/WhatsApp bots"] },
-  { label: "Cloud & Ops", items: ["GitHub Actions", "Docker", "Cloudflare", "AWS", "CI/CD"] },
+  { label: "Frontend", tile: "tile-cyan", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vite"] },
+  { label: "Backend", tile: "tile-violet", items: ["Node.js", "NestJS", "Fastify", "Python", "PostgreSQL", "Redis"] },
+  { label: "AI & Agents", tile: "tile-pink", items: ["LLM APIs", "Agent workflows", "RAG", "Automation", "TG/WhatsApp bots"] },
+  { label: "Cloud & Ops", tile: "tile-green", items: ["GitHub Actions", "Docker", "Cloudflare", "AWS", "CI/CD"] },
 ];

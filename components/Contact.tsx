@@ -1,4 +1,4 @@
-import { ArrowUpRight, Bot, Mail } from "lucide-react";
+import { ArrowUpRight, Bot } from "lucide-react";
 import { GithubIcon } from "./GithubIcon";
 import { profile } from "@/lib/data";
 import { Reveal } from "./Reveal";
@@ -7,23 +7,21 @@ export function Contact() {
   return (
     <section id="contact" className="mx-auto max-w-6xl px-5 py-28">
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-line bg-panel px-6 py-16 text-center sm:px-12 sm:py-24">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 text-center">
+          {/* aurora panel */}
+          <div className="aurora" aria-hidden />
           <div
-            className="absolute -top-24 left-1/2 h-72 w-[560px] -translate-x-1/2 rounded-full bg-acid/10 blur-[110px]"
+            className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_110%,transparent_20%,#07070c_95%)]"
             aria-hidden
           />
-          <div className="bg-grid absolute inset-0 opacity-60" aria-hidden />
 
-          <div className="relative">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-acid">
-              Contact
-            </p>
-            <h2 className="font-display mx-auto mt-5 max-w-3xl text-5xl font-bold tracking-[-0.03em] sm:text-6xl">
+          <div className="relative px-6 py-20 sm:px-12 sm:py-28">
+            <h2 className="font-display mx-auto max-w-3xl text-5xl font-bold tracking-[-0.03em] sm:text-7xl">
               Have something
               <br />
-              worth <span className="text-acid">building?</span>
+              worth <span className="text-gradient">building?</span>
             </h2>
-            <p className="mx-auto mt-6 max-w-md text-fog">
+            <p className="mx-auto mt-6 max-w-md text-zinc-300/80">
               A website that needs a second life, a process that needs an agent —
               bring it. First conversation is free.
             </p>
@@ -33,7 +31,7 @@ export function Contact() {
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-acid px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-[1.03] active:scale-95"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink transition-transform hover:scale-[1.04] active:scale-95"
               >
                 <GithubIcon className="size-4" />
                 GitHub — @Vs153698
@@ -42,7 +40,7 @@ export function Contact() {
                 href={profile.x}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm text-fog transition-colors hover:border-white/30 hover:text-white"
+                className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm text-zinc-100 transition-colors hover:bg-white/10"
               >
                 <ArrowUpRight className="size-4" />
                 @vs153698 on X
@@ -51,17 +49,12 @@ export function Contact() {
                 href={profile.telegramBot}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm text-fog transition-colors hover:border-acid/50 hover:text-acid"
+                className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm text-zinc-100 transition-colors hover:bg-white/10"
               >
-                <Bot className="size-4" />
+                <Bot className="size-4 text-fuchsia-300" />
                 Try my AI agent
               </a>
             </div>
-
-            <p className="mt-10 inline-flex items-center gap-2 font-mono text-xs text-fog">
-              <Mail className="size-3.5" />
-              Fastest reply: Telegram or X DM
-            </p>
           </div>
         </div>
       </Reveal>

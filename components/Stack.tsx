@@ -4,33 +4,36 @@ import { Reveal } from "./Reveal";
 export function Stack() {
   return (
     <section id="stack" className="mx-auto max-w-6xl px-5 py-28">
-      <Reveal>
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-acid">
+      <Reveal className="text-center">
+        <span className="glass inline-block rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-emerald-300">
           Stack
-        </p>
-        <h2 className="font-display mt-4 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
-          Boring where it should be, sharp where it counts.
+        </span>
+        <h2 className="font-display mx-auto mt-6 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
+          Boring where it should be,
+          <span className="text-gradient"> sharp where it counts</span>
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {stackGroups.map((g, i) => (
           <Reveal key={g.label} delay={i * 0.06}>
-            <div className="card-lift h-full rounded-2xl border border-line bg-panel p-6">
-              <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-fog">
-                {g.label}
-              </h3>
-              <ul className="mt-5 flex flex-col gap-2.5">
+            <div className="card-pop glass h-full rounded-3xl p-6">
+              <div className="flex items-center gap-3">
+                <span className={`tile ${g.tile} size-3 rounded-md`} />
+                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-zinc-300">
+                  {g.label}
+                </h3>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
                 {g.items.map((item) => (
-                  <li
+                  <span
                     key={item}
-                    className="flex items-center gap-2.5 text-sm text-zinc-200"
+                    className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/[0.08]"
                   >
-                    <span className="size-1.5 rounded-full bg-acid/70" />
                     {item}
-                  </li>
+                  </span>
                 ))}
-              </ul>
+              </div>
             </div>
           </Reveal>
         ))}

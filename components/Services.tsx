@@ -21,61 +21,76 @@ const icons: Record<string, LucideIcon> = {
 
 export function Services() {
   return (
-    <section id="services" className="mx-auto max-w-6xl px-5 py-28">
-      <Reveal>
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-acid">
-          Services
-        </p>
-        <h2 className="font-display mt-4 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
-          Everything a growing business needs to run online.
-        </h2>
-      </Reveal>
+    <section id="services" className="relative mx-auto max-w-6xl px-5 py-28">
+      <div className="aurora opacity-40" aria-hidden />
+      <div className="relative">
+        <Reveal className="text-center">
+          <span className="glass inline-block rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-violet-300">
+            Services
+          </span>
+          <h2 className="font-display mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+            Everything a growing business
+            <span className="text-gradient"> needs online</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-zinc-400">
+            From the website your customers see to the agents working behind it.
+          </p>
+        </Reveal>
 
-      <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((s, i) => {
-          const Icon = icons[s.icon];
-          return (
-            <Reveal
-              key={s.title}
-              delay={i * 0.06}
-              className={s.big ? "sm:col-span-2 lg:row-span-2" : ""}
-            >
-              <div
-                className={`card-lift group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-panel p-7 ${
-                  s.big ? "lg:p-9" : ""
-                }`}
+        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => {
+            const Icon = icons[s.icon];
+            return (
+              <Reveal
+                key={s.title}
+                delay={i * 0.06}
+                className={s.big ? "sm:col-span-2 lg:row-span-2" : ""}
               >
-                {s.big && (
-                  <div
-                    className="absolute -right-16 -top-16 size-56 rounded-full bg-acid/10 blur-3xl transition-opacity duration-500 group-hover:opacity-150"
-                    aria-hidden
-                  />
-                )}
-                <div className="mb-5 inline-flex size-11 items-center justify-center rounded-xl border border-line bg-ink text-acid">
-                  <Icon className="size-5" />
-                </div>
-                <h3
-                  className={`font-display font-bold tracking-tight ${
-                    s.big ? "text-3xl" : "text-xl"
+                <div
+                  className={`card-pop glass group relative flex h-full flex-col overflow-hidden rounded-3xl p-7 ${
+                    s.big ? "lg:p-9" : ""
                   }`}
                 >
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-fog">{s.desc}</p>
-                <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                  {s.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-line px-3 py-1 text-[11px] font-mono text-fog"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                  {s.big && (
+                    <>
+                      <div
+                        className="absolute -right-20 -top-20 size-64 rounded-full bg-violet-500/25 blur-3xl transition-opacity duration-500 group-hover:opacity-150"
+                        aria-hidden
+                      />
+                      <div
+                        className="absolute -bottom-24 -left-16 size-56 rounded-full bg-sky-500/15 blur-3xl"
+                        aria-hidden
+                      />
+                    </>
+                  )}
+                  <div className={`tile ${s.tile} relative mb-6 size-12`}>
+                    <Icon className="size-5" />
+                  </div>
+                  <h3
+                    className={`font-display relative font-bold tracking-tight ${
+                      s.big ? "text-3xl" : "text-xl"
+                    }`}
+                  >
+                    {s.title}
+                  </h3>
+                  <p className="relative mt-3 text-sm leading-relaxed text-zinc-400">
+                    {s.desc}
+                  </p>
+                  <div className="relative mt-auto flex flex-wrap gap-2 pt-6">
+                    {s.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-zinc-400"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          );
-        })}
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
