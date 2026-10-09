@@ -1,3 +1,5 @@
+"use client";
+
 import { company } from "@/lib/data";
 import { Reveal } from "./Reveal";
 
@@ -30,19 +32,17 @@ export function Contact() {
             >
               {company.email.toUpperCase()} →
             </a>
-            <a
-              href={company.telegramBot}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("wk:open-agent"))}
               className="nb-btn px-8 py-4 text-base text-cream"
               style={{
-                borderColor: "#f4f1ea",
                 boxShadow: "6px 6px 0 #f4f1ea",
                 border: "3px solid #f4f1ea",
               }}
             >
               TALK TO OUR AI AGENT
-            </a>
+            </button>
           </div>
         </Reveal>
 

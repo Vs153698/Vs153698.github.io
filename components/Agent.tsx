@@ -37,6 +37,12 @@ export function Agent() {
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
   useEffect(() => {
+    const onOpen = () => openChat();
+    window.addEventListener("wk:open-agent", onOpen);
+    return () => window.removeEventListener("wk:open-agent", onOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [history, typing, open]);
 
