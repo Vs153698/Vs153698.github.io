@@ -1,97 +1,56 @@
-import {
-  Bot,
-  CalendarCheck,
-  Database,
-  Globe,
-  RefreshCw,
-  Terminal,
-  type LucideIcon,
-} from "lucide-react";
 import { services } from "@/lib/data";
 import { Reveal } from "./Reveal";
 
-const icons: Record<string, LucideIcon> = {
-  Bot,
-  Globe,
-  RefreshCw,
-  Database,
-  CalendarCheck,
-  Terminal,
-};
-
 export function Services() {
   return (
-    <section id="services" className="relative mx-auto max-w-6xl px-5 py-28">
-      <div className="aurora opacity-40" aria-hidden />
-      <div className="relative">
-        <Reveal className="text-center">
-          <span className="glass inline-block rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-violet-300">
-            Services
-          </span>
-          <h2 className="font-display mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
-            Everything a growing business
-            <span className="text-gradient"> needs online</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-zinc-400">
-            From the website your customers see to the agents working behind it.
-          </p>
-        </Reveal>
-
-        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => {
-            const Icon = icons[s.icon];
-            return (
-              <Reveal
-                key={s.title}
-                delay={i * 0.06}
-                className={s.big ? "sm:col-span-2 lg:row-span-2" : ""}
-              >
-                <div
-                  className={`card-pop glass group relative flex h-full flex-col overflow-hidden rounded-3xl p-7 ${
-                    s.big ? "lg:p-9" : ""
-                  }`}
-                >
-                  {s.big && (
-                    <>
-                      <div
-                        className="absolute -right-20 -top-20 size-64 rounded-full bg-violet-500/25 blur-3xl transition-opacity duration-500 group-hover:opacity-150"
-                        aria-hidden
-                      />
-                      <div
-                        className="absolute -bottom-24 -left-16 size-56 rounded-full bg-sky-500/15 blur-3xl"
-                        aria-hidden
-                      />
-                    </>
-                  )}
-                  <div className={`tile ${s.tile} relative mb-6 size-12`}>
-                    <Icon className="size-5" />
-                  </div>
-                  <h3
-                    className={`font-display relative font-bold tracking-tight ${
-                      s.big ? "text-3xl" : "text-xl"
-                    }`}
-                  >
-                    {s.title}
-                  </h3>
-                  <p className="relative mt-3 text-sm leading-relaxed text-zinc-400">
-                    {s.desc}
-                  </p>
-                  <div className="relative mt-auto flex flex-wrap gap-2 pt-6">
-                    {s.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-zinc-400"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
+    <section id="services" className="mx-auto max-w-6xl px-5 py-28">
+      <Reveal>
+        <div className="flex items-center gap-4 text-[11px] tracking-[0.3em] text-fog">
+          <span className="text-phos">[ 01 ]</span> MODULES
+          <span className="h-px flex-1 bg-line-dim" />
+          <span className="hidden sm:inline">CAPABILITY INDEX</span>
         </div>
-      </div>
+        <h2 className="glow mt-8 max-w-2xl text-3xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
+          INSTALLED MODULES<span className="text-phos">.</span>
+        </h2>
+      </Reveal>
+
+      <Reveal delay={0.1}>
+        <div className="mt-12 border border-line bg-panel/60">
+          <div className="hidden grid-cols-[90px_1.1fr_2fr_auto] gap-4 border-b border-line px-5 py-2.5 text-[10px] tracking-[0.25em] text-fog md:grid">
+            <span>ID</span>
+            <span>MODULE</span>
+            <span>FUNCTION</span>
+            <span className="text-right">TAGS</span>
+          </div>
+          {services.map((s, i) => (
+            <div
+              key={s.title}
+              className="term-row grid grid-cols-1 gap-2 border-b border-line-dim px-5 py-5 last:border-0 md:grid-cols-[90px_1.1fr_2fr_auto] md:items-center md:gap-4"
+            >
+              <span className="text-xs text-phos">
+                M-{String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-sm font-bold tracking-tight text-zinc-100">
+                {s.title}
+              </span>
+              <span className="row-dim text-xs leading-relaxed text-fog">
+                {s.desc}
+              </span>
+              <span className="flex flex-wrap gap-2 md:justify-end">
+                {s.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="border border-line px-2 py-0.5 text-[10px] text-phos-bright/80"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </span>
+            </div>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }

@@ -1,144 +1,125 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Sparkles, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 import { profile } from "@/lib/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const chips = [
-  { label: "Next.js", tile: "tile-cyan" },
-  { label: "AI Agents", tile: "tile-violet" },
-  { label: "TypeScript", tile: "tile-blue" },
-  { label: "Python", tile: "tile-green" },
-  { label: "Automation", tile: "tile-pink" },
+function TypeLine({ text }: { text: string }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (n >= text.length) return;
+    const t = setTimeout(() => setN((v) => v + 1), 55 + Math.random() * 60);
+    return () => clearTimeout(t);
+  }, [n, text]);
+  return (
+    <span>
+      <span className="text-fog">{text.slice(0, n)}</span>
+      <span className="blink text-phos">▊</span>
+    </span>
+  );
+}
+
+const readout = [
+  { k: "OPERATOR", v: profile.name.toUpperCase() },
+  { k: "ROLE", v: "FULL-STACK DEV / AGENT BUILDER" },
+  { k: "STACK", v: "TS · PY · NEXT.JS · LLM" },
+  { k: "SECTOR", v: "WEB SYSTEMS + AI AUTOMATION" },
+  { k: "STATUS", v: "● ONLINE — ACCEPTING BRIEFS", hot: true },
 ];
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="aurora" aria-hidden />
+    <section id="top" className="dot-grid relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,transparent_30%,#07070c_100%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_35%,transparent_20%,#060807_95%)]"
         aria-hidden
       />
-
-      <div className="relative mx-auto flex min-h-[96vh] max-w-6xl flex-col items-center justify-center px-5 pt-28 pb-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.6, ease }}
-          className="mb-8"
+      <div className="relative mx-auto flex min-h-[94vh] max-w-6xl flex-col justify-center px-5 pt-24 pb-16">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="text-xs text-fog"
         >
-          <span className="glass inline-flex items-center gap-2.5 rounded-full px-4 py-2 text-xs text-zinc-200">
-            <span className="relative flex size-2">
-              <span className="animate-ping-dot absolute inline-flex size-full rounded-full bg-emerald-400" />
-              <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
-            </span>
-            Available for projects — {profile.location}
-          </span>
-        </motion.div>
+          <span className="text-phos">$</span> <TypeLine text={`./init --operator ${profile.shortName.toLowerCase()} --mode production`} />
+        </motion.p>
 
-        <h1 className="font-display max-w-4xl text-5xl leading-[1.04] font-bold tracking-[-0.03em] sm:text-7xl lg:text-[84px]">
-          {["I build web products"].map((line) => (
+        <h1 className="mt-10 text-4xl leading-[1.15] font-bold tracking-tight sm:text-6xl lg:text-7xl">
+          {["SYSTEMS THAT", "THINK.", "SOFTWARE THAT", "PAYS FOR ITSELF."].map((line, i) => (
             <span key={line} className="block overflow-hidden">
               <motion.span
-                className="block"
+                className={`block ${
+                  i === 1 ? "text-phos glow-strong" : i === 3 ? "text-amber" : "text-zinc-100"
+                }`}
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.1, ease }}
+                transition={{ duration: 0.8, delay: 0.5 + i * 0.12, ease }}
               >
                 {line}
+                {i === 3 && <span className="blink text-phos"> _</span>}
               </motion.span>
             </span>
           ))}
-          <span className="block overflow-hidden">
-            <motion.span
-              className="text-gradient block pb-2"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, delay: 0.22, ease }}
-            >
-              & AI agents
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.9, delay: 0.34, ease }}
-            >
-              that do the work.
-            </motion.span>
-          </span>
         </h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease }}
-          className="mt-7 max-w-xl text-lg text-zinc-300/80"
+          transition={{ duration: 0.7, delay: 1.1, ease }}
+          className="mt-8 max-w-xl text-sm leading-relaxed text-fog"
         >
-          {profile.shortName} — full-stack developer shipping platforms, business
-          systems and autonomous agents for founders in India & Australia.
+          {`// web platforms, CRMs, booking systems & autonomous agents`}
+          <br />
+          {`// deployed for founders in India & Australia since ${profile.since}`}
         </motion.p>
 
+        {/* status readout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.65, ease }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          transition={{ duration: 0.7, delay: 1.3, ease }}
+          className="tick-corners mt-12 max-w-2xl border border-line bg-panel/80"
         >
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 via-indigo-500 to-sky-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-12px_rgba(124,108,255,0.7)] transition-transform hover:scale-[1.04] active:scale-95"
-          >
-            <Zap className="size-4" />
-            Start a project
-            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-          <a
-            href="#work"
-            className="glass inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm text-zinc-200 transition-colors hover:bg-white/10"
-          >
-            <ArrowDown className="size-4" />
-            See the work
-          </a>
+          <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[10px] tracking-[0.25em] text-fog">
+            <span>SYS.READOUT</span>
+            <span>v{profile.year}.10</span>
+          </div>
+          <dl>
+            {readout.map((r) => (
+              <div
+                key={r.k}
+                className="grid grid-cols-[110px_1fr] gap-4 border-b border-line-dim px-4 py-2 text-xs last:border-0 sm:grid-cols-[160px_1fr]"
+              >
+                <dt className="text-fog">{r.k}</dt>
+                <dd className={r.hot ? "text-phos glow" : "text-zinc-200"}>{r.v}</dd>
+              </div>
+            ))}
+          </dl>
         </motion.div>
 
-        {/* floating tech chips */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-3"
+          transition={{ duration: 1, delay: 1.7 }}
+          className="mt-12 flex flex-wrap items-center gap-3 text-xs"
         >
-          {chips.map((c, i) => (
-            <span
-              key={c.label}
-              className={`animate-float glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium text-zinc-200 ${
-                i % 2 === 0 ? "" : "[animation-delay:-3.5s]"
-              }`}
-            >
-              <span className={`tile ${c.tile} size-2 rounded-full`} />
-              {c.label}
-            </span>
-          ))}
+          <a href="#work" className="inv-btn border border-line px-5 py-2.5 text-phos-bright">
+            ▼ ./inspect --work
+          </a>
+          <a href="#contact" className="inv-btn border border-line px-5 py-2.5 text-phos-bright">
+            ▶ ./open-channel
+          </a>
+          <a
+            href={profile.telegramBot}
+            target="_blank"
+            rel="noreferrer"
+            className="px-3 py-2.5 text-fog transition-colors hover:text-phos-bright"
+          >
+            $ ./talk-to-agent ↗
+          </a>
         </motion.div>
-
-        <motion.a
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          href={profile.telegramBot}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-8 inline-flex items-center gap-2 text-xs text-zinc-400 transition-colors hover:text-fuchsia-300"
-        >
-          <Sparkles className="size-3.5" />
-          Psst — you can talk to my AI agent right now
-        </motion.a>
       </div>
     </section>
   );

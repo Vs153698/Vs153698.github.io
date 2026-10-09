@@ -1,81 +1,95 @@
-import { MapPin, TerminalSquare } from "lucide-react";
 import { profile } from "@/lib/data";
 import { Reveal } from "./Reveal";
 
+const log = [
+  {
+    t: "2021.06",
+    tag: "BOOT",
+    text: "First commit. Python developer — scripts, bots, automation.",
+  },
+  {
+    t: "2023",
+    tag: "EXPAND",
+    text: "Full-stack turn: TypeScript, React, Node. Started shipping client work.",
+  },
+  {
+    t: "2025",
+    tag: "SYSTEMS",
+    text: "CRM & booking platforms in production — India and Australia.",
+  },
+  {
+    t: "2026",
+    tag: "AGENTS",
+    text: "AI agents enter the stack: WhatsApp/Telegram bots that do real work.",
+  },
+];
+
 const facts = [
-  { k: "Based in", v: "Kota, Rajasthan, IN" },
-  { k: "Markets", v: "India & Australia" },
-  { k: "Shipping since", v: "2021" },
-  { k: "Focus", v: "Web platforms · AI agents" },
+  { k: "LOCATION", v: "KOTA, RJ, IN — 25.2138°N 75.8640°E" },
+  { k: "MARKETS", v: "INDIA · AUSTRALIA" },
+  { k: "SINCE", v: "2021" },
+  { k: "MODE", v: "REMOTE-FIRST" },
 ];
 
 export function About() {
   return (
-    <section className="relative overflow-hidden border-y border-line bg-white/[0.02]">
-      <div className="aurora opacity-25" aria-hidden />
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-5 py-28 lg:grid-cols-[1.15fr_1fr]">
+    <section className="border-y border-line-dim bg-panel/60">
+      <div className="mx-auto max-w-6xl px-5 py-28">
         <Reveal>
-          <span className="glass inline-block rounded-full px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-amber-300">
-            About
-          </span>
-          <h2 className="font-display mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
-            Developer first.
-            <br />
-            <span className="text-gradient-warm">Business minded.</span>
-          </h2>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300/85">
-            I started as a Python developer and went deep into the web — today I
-            build production platforms end-to-end: the frontend your customers
-            touch, the systems your team works in, and the AI agents that keep
-            both running after hours.
-          </p>
-          <p className="mt-4 max-w-xl leading-relaxed text-zinc-400">
-            CRMs, booking platforms, WhatsApp and Telegram agents — I care about
-            one thing: software that quietly pays for itself.
-          </p>
-          <p className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-zinc-300">
-            <MapPin className="size-4 text-rose-400" />
-            {profile.location} — working with clients everywhere
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.15}>
-          {/* terminal card */}
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a12]/90 shadow-[0_30px_80px_-30px_rgba(124,108,255,0.4)]">
-            <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5">
-              <span className="size-3 rounded-full bg-rose-500/80" />
-              <span className="size-3 rounded-full bg-amber-400/80" />
-              <span className="size-3 rounded-full bg-emerald-400/80" />
-              <span className="ml-3 inline-flex items-center gap-1.5 font-mono text-xs text-zinc-500">
-                <TerminalSquare className="size-3.5" />
-                vaibhav — zsh
-              </span>
-            </div>
-            <div className="space-y-2.5 px-5 py-6 font-mono text-[13px] leading-relaxed">
-              <p className="text-zinc-500"># whoami</p>
-              <p className="text-zinc-200">
-                full-stack dev · AI agent builder · <span className="text-sky-300">since 2021</span>
-              </p>
-              <p className="text-zinc-500"># cat facts.json</p>
-              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                {facts.map((f) => (
-                  <p key={f.k} className="flex justify-between gap-6">
-                    <span className="text-zinc-500">"{f.k}"</span>
-                    <span className="text-emerald-300">"{f.v}"</span>
-                  </p>
-                ))}
-              </div>
-              <p className="pt-1">
-                <span className="text-fuchsia-300">➜</span>{" "}
-                <span className="text-zinc-200">status</span>
-                <span className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2.5 py-0.5 text-xs text-emerald-300">
-                  <span className="size-1.5 rounded-full bg-emerald-400" />
-                  open_to_work --remote
-                </span>
-              </p>
-            </div>
+          <div className="flex items-center gap-4 text-[11px] tracking-[0.3em] text-fog">
+            <span className="text-phos">[ 04 ]</span> MISSION LOG
+            <span className="h-px flex-1 bg-line-dim" />
+            <span className="hidden sm:inline">TAIL -F OPERATOR.LOG</span>
           </div>
         </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_1fr]">
+          <div>
+            {log.map((e, i) => (
+              <Reveal key={e.t} delay={i * 0.06}>
+                <div className="term-row grid grid-cols-[86px_80px_1fr] gap-3 border-b border-line-dim px-2 py-4 text-xs sm:grid-cols-[100px_90px_1fr]">
+                  <span className="text-phos">{e.t}</span>
+                  <span className="text-amber">[{e.tag}]</span>
+                  <span className="row-dim leading-relaxed text-zinc-300">
+                    {e.text}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.15}>
+            <div className="tick-corners border border-line bg-ink">
+              <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[10px] tracking-[0.25em] text-fog">
+                <span>OPERATOR.SPEC</span>
+                <span className="text-phos">[ VERIFIED ]</span>
+              </div>
+              <dl>
+                {facts.map((f) => (
+                  <div
+                    key={f.k}
+                    className="grid grid-cols-[90px_1fr] gap-3 border-b border-line-dim px-4 py-3 text-xs last:border-0"
+                  >
+                    <dt className="text-fog">{f.k}</dt>
+                    <dd className="text-zinc-200">{f.v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="px-4 py-3 text-xs">
+                <span className="text-fog">$ status</span>
+                <span className="ml-3 text-phos glow">
+                  ● OPEN_TO_WORK --remote
+                </span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        <p className="mt-10 max-w-2xl text-xs leading-relaxed text-fog">
+          {`// ${profile.shortName} — the short version: I build the frontend your customers
+          // touch, the systems your team works in, and the agents that keep
+          // both running after hours.`}
+        </p>
       </div>
     </section>
   );
