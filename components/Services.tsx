@@ -1,16 +1,19 @@
 import { services } from "@/lib/data";
 import { Reveal } from "./Reveal";
+import { Asterisk, Scribble } from "./Doodles";
 
 export function Services() {
   return (
-    <section id="services" className="px-5 py-20 sm:py-24">
+    <section id="services" className="relative px-5 py-20 sm:py-24">
+      <Asterisk className="absolute top-16 right-[5%] hidden w-9 rotate-45 text-ink lg:block" />
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <span className="hl hl-red -rotate-1 text-[13px] font-bold tracking-wide uppercase">
             What we do
           </span>
-          <h2 className="mt-6 text-4xl font-bold tracking-tight uppercase sm:text-6xl">
+          <h2 className="relative mt-6 inline-block text-4xl font-bold tracking-tight uppercase sm:text-6xl">
             Pick your weapon
+            <Scribble className="absolute -bottom-4 left-0 w-64 text-purple sm:w-96" />
           </h2>
         </Reveal>
 

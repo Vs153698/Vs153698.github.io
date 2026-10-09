@@ -10,16 +10,18 @@ export const company = {
 export type Project = {
   name: string;
   url: string;
+  host: string;
   tag: string; // sector · LIVE
+  img: string;
 };
 
 export const projects: Project[] = [
-  { name: "National Book of Records", url: "https://nationalbookofrecords.org/", tag: "Portal · India" },
-  { name: "HommCorp Australia", url: "https://hommcorp.com.au/", tag: "Booking · Melbourne" },
-  { name: "Willsmeet", url: "https://willsmeet.com/", tag: "B2B Commerce" },
-  { name: "ProSportsData.ai", url: "https://prosportsdata.ai/", tag: "AI Product" },
-  { name: "Chennai Bulls Rugby", url: "https://chennaibullsrugby.com/", tag: "Sports Club" },
-  { name: "NBR CRM", url: "https://crm.codeniti.in/login", tag: "Internal Systems" },
+  { name: "National Book of Records", url: "https://nationalbookofrecords.org/", host: "nationalbookofrecords.org", tag: "Portal · India", img: "/work/nbr.jpg" },
+  { name: "HommCorp Australia", url: "https://hommcorp.com.au/", host: "hommcorp.com.au", tag: "Booking · Melbourne", img: "/work/homm.jpg" },
+  { name: "Willsmeet", url: "https://willsmeet.com/", host: "willsmeet.com", tag: "B2B Commerce", img: "/work/willsmeet.jpg" },
+  { name: "ProSportsData.ai", url: "https://prosportsdata.ai/", host: "prosportsdata.ai", tag: "AI Product", img: "/work/psd.jpg" },
+  { name: "Chennai Bulls Rugby", url: "https://chennaibullsrugby.com/", host: "chennaibullsrugby.com", tag: "Sports Club", img: "/work/bulls.jpg" },
+  { name: "NBR CRM", url: "https://crm.codeniti.in/login", host: "crm.codeniti.in", tag: "Internal Systems", img: "/work/nbrcrm.jpg" },
 ];
 
 export const services = [
