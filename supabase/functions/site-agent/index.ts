@@ -51,7 +51,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         model: MODEL,
         temperature: 0.3,
-        max_tokens: 700, // must clear the reasoning phase or thinking leaks into content
+        max_tokens: 1600, // reasoning must fully finish or its text leaks into content
         messages: [
           { role: "system", content: SYSTEM },
           ...history.slice(-12).map((m) => ({
@@ -64,8 +64,14 @@ Deno.serve(async (req) => {
     if (!r.ok) return Response.json({ reply: null }, { headers: cors });
 
     const j = await r.json();
-    const text = (j?.choices?.[0]?.message?.content ?? "").trim();
-    const leaked = /thinking process|\*\*Analyze|\*\*Identify/i.test(text);
+    const choice = j?.choices?.[0];
+    const text = (choice?.message?.content ?? "").trim();
+    const finish = choice?.finish_reason;
+    const leaked =
+      finish !== "stop" ||
+      /thinking process|test framework|\*\*Analyze|\*\*Identify|the (question|user) (from|was|is)/i.test(
+        text
+      );
     return Response.json({ reply: text && !leaked ? text.slice(0, 500) : null }, { headers: cors });
   } catch {
     return Response.json({ reply: null }, { headers: cors });

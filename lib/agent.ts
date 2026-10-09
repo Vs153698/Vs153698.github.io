@@ -18,7 +18,7 @@ export const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhndWZiZnRsdnZ1cGtvYmlpcmF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1MTkzMzcsImV4cCI6MjEwNzA5NTMzN30.oHUjDZiGpx2cBqS92G7T1nXNXuThobfwgcjCYXpSLn0"; // public anon key (RLS insert-only)
 export const SUPABASE_TABLE = "lead_chats";
 
-export const LLM_ENDPOINT = ""; // optional custom endpoint
+export const LLM_ENDPOINT = "https://hgufbftlvvupkobiirat.supabase.co/functions/v1/site-agent"; // Supabase edge fn proxy (OpenRouter key lives server-side)
 
 // OpenRouter (nvidia/nemotron-3.5-lightning:free) is the preferred brain,
 // but its key CANNOT live in this public repo (GitHub push protection blocks
@@ -206,6 +206,7 @@ async function askOpenRouter(history: Msg[]): Promise<string | null> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         Referer: OPENROUTER_REFERER,
       },
       body: JSON.stringify({ history }),
