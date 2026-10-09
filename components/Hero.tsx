@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { profile } from "@/lib/data";
+import { company } from "@/lib/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -10,7 +10,7 @@ function TypeLine({ text }: { text: string }) {
   const [n, setN] = useState(0);
   useEffect(() => {
     if (n >= text.length) return;
-    const t = setTimeout(() => setN((v) => v + 1), 55 + Math.random() * 60);
+    const t = setTimeout(() => setN((v) => v + 1), 50 + Math.random() * 55);
     return () => clearTimeout(t);
   }, [n, text]);
   return (
@@ -22,11 +22,11 @@ function TypeLine({ text }: { text: string }) {
 }
 
 const readout = [
-  { k: "OPERATOR", v: profile.name.toUpperCase() },
-  { k: "ROLE", v: "FULL-STACK DEV / AGENT BUILDER" },
-  { k: "STACK", v: "TS · PY · NEXT.JS · LLM" },
-  { k: "SECTOR", v: "WEB SYSTEMS + AI AUTOMATION" },
-  { k: "STATUS", v: "● ONLINE — ACCEPTING BRIEFS", hot: true },
+  { k: "ORGANIZATION", v: `${company.name.toUpperCase()} — SOFTWARE LAB` },
+  { k: "FUNCTION", v: "WEB SYSTEMS + AI AGENTS, DEPLOYED & MAINTAINED" },
+  { k: "SECTORS", v: "RECORDS · SPORTS · PROCUREMENT · HOME SERVICES · AI" },
+  { k: "FOOTPRINT", v: "INDIA · AUSTRALIA — REMOTE-FIRST" },
+  { k: "STATUS", v: "● ONLINE — ACCEPTING NEW BRIEFS", hot: true },
 ];
 
 export function Hero() {
@@ -43,15 +43,20 @@ export function Hero() {
           transition={{ duration: 0.4 }}
           className="text-xs text-fog"
         >
-          <span className="text-phos">$</span> <TypeLine text={`./init --operator ${profile.shortName.toLowerCase()} --mode production`} />
+          <span className="text-phos">$</span>{" "}
+          <TypeLine text={`./deploy --org ${company.name.toLowerCase()} --mode production`} />
         </motion.p>
 
         <h1 className="mt-10 text-4xl leading-[1.15] font-bold tracking-tight sm:text-6xl lg:text-7xl">
-          {["SYSTEMS THAT", "THINK.", "SOFTWARE THAT", "PAYS FOR ITSELF."].map((line, i) => (
+          {["WE BUILD", "DIGITAL SYSTEMS", "THAT THINK &", "RUN THE BUSINESS."].map((line, i) => (
             <span key={line} className="block overflow-hidden">
               <motion.span
                 className={`block ${
-                  i === 1 ? "text-phos glow-strong" : i === 3 ? "text-amber" : "text-zinc-100"
+                  i === 3
+                    ? "text-amber"
+                    : i === 1
+                      ? "text-phos glow-strong"
+                      : "text-zinc-100"
                 }`}
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
@@ -70,9 +75,9 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 1.1, ease }}
           className="mt-8 max-w-xl text-sm leading-relaxed text-fog"
         >
-          {`// web platforms, CRMs, booking systems & autonomous agents`}
+          {`// ${company.tagline.toLowerCase()}`}
           <br />
-          {`// deployed for founders in India & Australia since ${profile.since}`}
+          {`// portals, crms, booking platforms & ai products — live in production`}
         </motion.p>
 
         {/* status readout */}
@@ -84,7 +89,7 @@ export function Hero() {
         >
           <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[10px] tracking-[0.25em] text-fog">
             <span>SYS.READOUT</span>
-            <span>v{profile.year}.10</span>
+            <span>v{company.year}.10</span>
           </div>
           <dl>
             {readout.map((r) => (
@@ -106,18 +111,10 @@ export function Hero() {
           className="mt-12 flex flex-wrap items-center gap-3 text-xs"
         >
           <a href="#work" className="inv-btn border border-line px-5 py-2.5 text-phos-bright">
-            ▼ ./inspect --work
+            ▼ ./inspect --systems
           </a>
           <a href="#contact" className="inv-btn border border-line px-5 py-2.5 text-phos-bright">
-            ▶ ./open-channel
-          </a>
-          <a
-            href={profile.telegramBot}
-            target="_blank"
-            rel="noreferrer"
-            className="px-3 py-2.5 text-fog transition-colors hover:text-phos-bright"
-          >
-            $ ./talk-to-agent ↗
+            ▶ ./open-brief
           </a>
         </motion.div>
       </div>

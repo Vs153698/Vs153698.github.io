@@ -8,36 +8,37 @@ export function Services() {
         <div className="flex items-center gap-4 text-[11px] tracking-[0.3em] text-fog">
           <span className="text-phos">[ 01 ]</span> MODULES
           <span className="h-px flex-1 bg-line-dim" />
-          <span className="hidden sm:inline">CAPABILITY INDEX</span>
+          <span className="hidden sm:inline">SERVICE CAPABILITY INDEX</span>
         </div>
         <h2 className="glow mt-8 max-w-2xl text-3xl font-bold tracking-tight text-zinc-100 sm:text-5xl">
-          INSTALLED MODULES<span className="text-phos">.</span>
+          WHAT WE OPERATE<span className="text-phos">.</span>
         </h2>
       </Reveal>
 
       <Reveal delay={0.1}>
-        <div className="mt-12 border border-line bg-panel/60">
-          <div className="hidden grid-cols-[90px_1.1fr_2fr_auto] gap-4 border-b border-line px-5 py-2.5 text-[10px] tracking-[0.25em] text-fog md:grid">
-            <span>ID</span>
-            <span>MODULE</span>
-            <span>FUNCTION</span>
-            <span className="text-right">TAGS</span>
-          </div>
+        <div className="mt-12 grid grid-cols-1 gap-px border border-line bg-line-dim md:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
             <div
               key={s.title}
-              className="term-row grid grid-cols-1 gap-2 border-b border-line-dim px-5 py-5 last:border-0 md:grid-cols-[90px_1.1fr_2fr_auto] md:items-center md:gap-4"
+              className={`group bg-ink p-7 transition-colors hover:bg-panel ${
+                s.big ? "md:col-span-2 lg:col-span-1" : ""
+              }`}
             >
-              <span className="text-xs text-phos">
-                M-{String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="text-sm font-bold tracking-tight text-zinc-100">
+              <div className="flex items-baseline justify-between">
+                <span className="text-xs text-phos">
+                  M-{String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[10px] tracking-[0.2em] text-fog opacity-0 transition-opacity group-hover:opacity-100">
+                  [ LOADED ]
+                </span>
+              </div>
+              <h3 className="mt-4 text-base font-bold tracking-tight text-zinc-100 group-hover:text-phos-bright">
                 {s.title}
-              </span>
-              <span className="row-dim text-xs leading-relaxed text-fog">
+              </h3>
+              <p className="mt-3 min-h-[72px] text-xs leading-relaxed text-fog">
                 {s.desc}
-              </span>
-              <span className="flex flex-wrap gap-2 md:justify-end">
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2 border-t border-line-dim pt-4">
                 {s.tags.map((t) => (
                   <span
                     key={t}
@@ -46,7 +47,7 @@ export function Services() {
                     {t}
                   </span>
                 ))}
-              </span>
+              </div>
             </div>
           ))}
         </div>

@@ -1,45 +1,22 @@
-import { profile } from "@/lib/data";
+import { company, log } from "@/lib/data";
 import { Reveal } from "./Reveal";
 
-const log = [
-  {
-    t: "2021.06",
-    tag: "BOOT",
-    text: "First commit. Python developer — scripts, bots, automation.",
-  },
-  {
-    t: "2023",
-    tag: "EXPAND",
-    text: "Full-stack turn: TypeScript, React, Node. Started shipping client work.",
-  },
-  {
-    t: "2025",
-    tag: "SYSTEMS",
-    text: "CRM & booking platforms in production — India and Australia.",
-  },
-  {
-    t: "2026",
-    tag: "AGENTS",
-    text: "AI agents enter the stack: WhatsApp/Telegram bots that do real work.",
-  },
-];
-
 const facts = [
-  { k: "LOCATION", v: "KOTA, RJ, IN — 25.2138°N 75.8640°E" },
-  { k: "MARKETS", v: "INDIA · AUSTRALIA" },
-  { k: "SINCE", v: "2021" },
-  { k: "MODE", v: "REMOTE-FIRST" },
+  { k: "HQ", v: "KOTA, RJ, IN — 25.2138°N 75.8640°E" },
+  { k: "DEPLOYMENTS", v: "IN · AU — PRODUCTION" },
+  { k: "OPERATING SINCE", v: String(company.since) },
+  { k: "MODE", v: "REMOTE-FIRST · FIXED-SCOPE" },
 ];
 
 export function About() {
   return (
-    <section className="border-y border-line-dim bg-panel/60">
+    <section id="about" className="border-y border-line-dim bg-panel/60">
       <div className="mx-auto max-w-6xl px-5 py-28">
         <Reveal>
           <div className="flex items-center gap-4 text-[11px] tracking-[0.3em] text-fog">
-            <span className="text-phos">[ 04 ]</span> MISSION LOG
+            <span className="text-phos">[ 03 ]</span> OPERATION LOG
             <span className="h-px flex-1 bg-line-dim" />
-            <span className="hidden sm:inline">TAIL -F OPERATOR.LOG</span>
+            <span className="hidden sm:inline">TAIL -F {company.name.toUpperCase()}.LOG</span>
           </div>
         </Reveal>
 
@@ -61,14 +38,14 @@ export function About() {
           <Reveal delay={0.15}>
             <div className="tick-corners border border-line bg-ink">
               <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[10px] tracking-[0.25em] text-fog">
-                <span>OPERATOR.SPEC</span>
+                <span>{company.name.toUpperCase()}.SPEC</span>
                 <span className="text-phos">[ VERIFIED ]</span>
               </div>
               <dl>
                 {facts.map((f) => (
                   <div
                     key={f.k}
-                    className="grid grid-cols-[90px_1fr] gap-3 border-b border-line-dim px-4 py-3 text-xs last:border-0"
+                    className="grid grid-cols-[120px_1fr] gap-3 border-b border-line-dim px-4 py-3 text-xs last:border-0"
                   >
                     <dt className="text-fog">{f.k}</dt>
                     <dd className="text-zinc-200">{f.v}</dd>
@@ -78,7 +55,7 @@ export function About() {
               <div className="px-4 py-3 text-xs">
                 <span className="text-fog">$ status</span>
                 <span className="ml-3 text-phos glow">
-                  ● OPEN_TO_WORK --remote
+                  ● ACCEPTING_NEW_MISSIONS
                 </span>
               </div>
             </div>
@@ -86,9 +63,9 @@ export function About() {
         </div>
 
         <p className="mt-10 max-w-2xl text-xs leading-relaxed text-fog">
-          {`// ${profile.shortName} — the short version: I build the frontend your customers
-          // touch, the systems your team works in, and the agents that keep
-          // both running after hours.`}
+          {`// ${company.name} is a small software lab. we keep the team tight and the
+          // systems boring where they should be — so your business can be
+          // sharp exactly where it counts.`}
         </p>
       </div>
     </section>
