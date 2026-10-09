@@ -74,6 +74,24 @@ export function Hero() {
                 </span>
               </div>
             </Reveal>
+
+            {/* compact guarantee card — mobile/tablet, where the right column hides */}
+            <Reveal delay={0.25}>
+              <div className="nb-border mt-8 bg-white p-4 shadow-[5px_5px_0_var(--color-ink)] lg:hidden">
+                <p className="text-xs font-bold tracking-widest uppercase">
+                  What you <span className="hl hl-yellow">get</span>
+                </p>
+                <p className="mt-2 text-sm leading-snug font-medium">
+                  ✔ Fixed quote in 48h
+                  <span className="mx-2 text-red">·</span>
+                  ✔ Weekly live previews
+                  <span className="mx-2 text-red">·</span>
+                  ✔ 30-day support
+                  <span className="mx-2 text-red">·</span>
+                  ✔ You own the code
+                </p>
+              </div>
+            </Reveal>
           </div>
 
           {/* right — stamp + what-you-get card (fills the empty right side) */}
