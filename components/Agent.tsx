@@ -73,15 +73,18 @@ export function Agent() {
     push({ role: "user", text });
     setTyping(true);
 
-    // free-form question → KB first (instant), free tiny LLM as fallback
+    // free-form question → KB first (instant), Nemotron as fallback
     if (stage === "done" || isQuestion(text)) {
+      const kb = kbAnswer(text);
+      const llm = kb ? null : await askLlm([...history, { role: "user", text }]);
       const answer =
-        kbAnswer(text) ??
-        (await askLlm([...history, { role: "user", text }])) ??
+        kb ??
+        llm ??
         "The team's best answer needs a human eye on it — leave your email or phone in the flow and they'll reply within 24h.";
+      const via: "kb" | "llm" | "fallback" = kb ? "kb" : llm ? "llm" : "fallback";
       later(() => {
         setTyping(false);
-        push({ role: "agent", text: answer });
+        push({ role: "agent", text: answer, via });
         if (stage !== "done") {
           later(() => push({ role: "agent", text: STAGE_QUESTION[stage as Exclude<Stage, "done">] }), 400);
         }
@@ -165,6 +168,11 @@ export function Agent() {
                   }
                 >
                   {m.text}
+              {m.role === "agent" && m.via === "llm" && (
+                <span className="ml-1.5 inline-block -translate-y-0.5 border-2 border-ink bg-purple px-1 py-px align-middle text-[8px] font-bold uppercase leading-none text-cream">
+                  AI
+                </span>
+              )}
                 </div>
               </div>
             ))}

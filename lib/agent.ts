@@ -40,7 +40,7 @@ const LLM_SYSTEM = [
 
 export type Stage = "need" | "name" | "business" | "budget" | "contact" | "done";
 
-export type Msg = { role: "agent" | "user"; text: string };
+export type Msg = { role: "agent" | "user"; text: string; via?: "kb" | "llm" | "fallback" };
 
 export type Lead = {
   need: string;
