@@ -1,76 +1,43 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-
-const ease = [0.22, 1, 0.36, 1] as const;
+import { Reveal } from "./Reveal";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="grid-bg absolute inset-0" aria-hidden />
+    <section id="top" className="px-5 pt-20 pb-16 sm:pt-28 sm:pb-20">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <h1 className="text-[52px] leading-[0.95] font-bold tracking-tight uppercase sm:text-8xl lg:text-[110px]">
+            We build
+            <br />
+            <span className="hl hl-red">websites</span> that
+            <br />
+            sell <span className="hl hl-purple">24/7.</span>
+          </h1>
+        </Reveal>
 
-      <div className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-5 pt-28 pb-16 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease }}
-          className="flex items-center gap-2 rounded-full border border-line bg-white px-4 py-1.5 text-[13px] text-fog shadow-sm"
-        >
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-          </span>
-          Accepting new projects — websites, apps & AI agents
-        </motion.div>
+        <Reveal delay={0.1}>
+          <p className="mt-9 max-w-xl text-lg leading-snug font-medium sm:text-xl">
+            CodeNiti is a small software lab shipping websites, platforms and AI
+            agents for businesses in India &amp; Australia. Real systems. Real
+            clients. No templates.
+          </p>
+        </Reveal>
 
-        <h1 className="mt-8 max-w-4xl text-[44px] leading-[1.08] font-bold tracking-tight text-ink sm:text-6xl lg:text-[72px]">
-          {["Your website is your", "first salesperson.", "We make it convert."].map(
-            (line, i) => (
-              <span key={line} className="block overflow-hidden">
-                <motion.span
-                  className={`block ${i === 1 ? "text-accent" : ""}`}
-                  initial={{ y: "110%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.75, delay: 0.1 + i * 0.1, ease }}
-                >
-                  {line}
-                </motion.span>
-              </span>
-            )
-          )}
-        </h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.55, ease }}
-          className="mt-6 max-w-xl text-base leading-relaxed text-fog sm:text-lg"
-        >
-          CodeNiti designs and builds websites, platforms and AI agents for
-          businesses — live and running across India and Australia since 2021.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.7, ease }}
-          className="mt-9 flex flex-wrap items-center justify-center gap-3"
-        >
-          <a
-            href="#contact"
-            className="group flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-accent-deep"
-          >
-            Start a project
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href="#work"
-            className="rounded-full border border-line bg-white px-7 py-3.5 text-sm font-semibold text-ink transition hover:border-line-bright"
-          >
-            See the work
-          </a>
-        </motion.div>
+        <Reveal delay={0.2}>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              className="nb-btn bg-red px-7 py-4 text-base text-white sm:px-9"
+            >
+              GET A QUOTE →
+            </a>
+            <a
+              href="#work"
+              className="nb-btn bg-white px-7 py-4 text-base sm:px-9"
+            >
+              SEE THE WORK
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

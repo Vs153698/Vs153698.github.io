@@ -1,42 +1,30 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const space = Space_Grotesk({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-space",
 });
 
 export const metadata: Metadata = {
-  title: "Vaibhav Singh Bhadouria — Full-Stack Developer & AI Agent Builder",
+  title: "CodeNiti — Websites, Apps & AI Agents that sell 24/7",
   description:
-    "I build web platforms, business systems and AI agents for founders — from Kota, India, for clients everywhere.",
-  openGraph: {
-    title: "Vaibhav Singh Bhadouria — Developer & AI Agent Builder",
-    description:
-      "Web platforms, CRM systems, booking flows and autonomous agents that pay for themselves.",
-    url: "https://vs153698.github.io",
-    siteName: "vaibhav.dev",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    creator: "@vs153698",
-  },
+    "CodeNiti is a software lab shipping websites, platforms and AI agents for businesses in India & Australia. Real systems, real clients, no templates.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export const viewport: Viewport = {
+  themeColor: "#ffd02f",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body className={`${space.variable} font-sans antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
