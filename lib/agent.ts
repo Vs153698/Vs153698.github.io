@@ -111,6 +111,9 @@ const keyRes = new Map(
 
 const GREETING_RE = /\b(hello|hi+|hey|namaste|yo|hola|good\s(morning|afternoon|evening))\b/i;
 const QUESTION_RE = /\b(what|how|which|why|who|when|where|can|could|do|does|did|is|are|am|tell|show|explain|wanna|want to)\b/i;
+// imperative requests — must go to the AI (which deflects), never into the lead form
+const REQUEST_RE =
+  /\b(write|sing|code|coding|program|script|debug|song|poem|joke|story|recipe|solve|calculate|translate|draw|paint|essay|summari[sz]e|make me|give me|tell me a)\b/i;
 
 export function kbAnswer(text: string): string | null {
   let best: { score: number; answer: string } | null = null;
@@ -122,11 +125,14 @@ export function kbAnswer(text: string): string | null {
   return best?.answer ?? null;
 }
 
-// Route to answering only when it really is a question — short answers like
-// "vaibhav" or "ai agent for my shop" belong to the lead flow.
+// Route to answering only when it really is a question or request — short
+// flow answers like "vaibhav" belong to the lead form, but "write a code for
+// fibonacci series" must be answered (and deflected), never recorded as a name.
 export function isQuestion(text: string): boolean {
   if (text.includes("?")) return true;
   if (GREETING_RE.test(text)) return true;
+  if (REQUEST_RE.test(text)) return true;
+  if (text.length > 60) return true;
   return QUESTION_RE.test(text) && kbAnswer(text) !== null;
 }
 
