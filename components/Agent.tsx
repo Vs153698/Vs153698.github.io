@@ -6,8 +6,8 @@ import {
   GREETING,
   STAGE_QUESTION,
   askLlm,
+  isQuestion,
   kbAnswer,
-  looksLikeQuestion,
   nextStage,
   storeLocal,
   storeSupabase,
@@ -67,12 +67,12 @@ export function Agent() {
     push({ role: "user", text });
     setTyping(true);
 
-    // free-form question → KB first, LLM (if configured) as fallback
-    if (stage === "done" || looksLikeQuestion(text)) {
+    // free-form question → KB first (instant), free tiny LLM as fallback
+    if (stage === "done" || isQuestion(text)) {
       const answer =
         kbAnswer(text) ??
         (await askLlm([...history, { role: "user", text }])) ??
-        "Good question — the team can answer it precisely. Want to leave your email/phone so they can reply within 24h?";
+        "The team's best answer needs a human eye on it — leave your email or phone in the flow and they'll reply within 24h.";
       later(() => {
         setTyping(false);
         push({ role: "agent", text: answer });
