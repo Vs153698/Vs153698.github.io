@@ -12,8 +12,10 @@
 
 export const AGENT_EMAIL_TO = "hello@webkraft.in"; // where transcripts go
 
-export const SUPABASE_URL = ""; // e.g. https://xyz.supabase.co
-export const SUPABASE_ANON_KEY = ""; // public anon key (RLS insert-only)
+export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://hgufbftlvvupkobiirat.supabase.co"; // e.g. https://xyz.supabase.co
+export const SUPABASE_ANON_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhndWZiZnRsdnZ1cGtvYmlpcmF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1MTkzMzcsImV4cCI6MjEwNzA5NTMzN30.oHUjDZiGpx2cBqS92G7T1nXNXuThobfwgcjCYXpSLn0"; // public anon key (RLS insert-only)
 export const SUPABASE_TABLE = "lead_chats";
 
 export const LLM_ENDPOINT = ""; // optional custom endpoint
