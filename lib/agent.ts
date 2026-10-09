@@ -110,10 +110,12 @@ const keyRes = new Map(
 );
 
 const GREETING_RE = /\b(hello|hi+|hey|namaste|yo|hola|good\s(morning|afternoon|evening))\b/i;
-const QUESTION_RE = /\b(what|how|which|why|who|when|where|can|could|do|does|did|is|are|am|tell|show|explain|wanna|want to)\b/i;
 // imperative requests — must go to the AI (which deflects), never into the lead form
 const REQUEST_RE =
   /\b(write|sing|code|coding|program|script|debug|song|poem|joke|story|recipe|solve|calculate|translate|draw|paint|essay|summari[sz]e|make me|give me|tell me a)\b/i;
+const WH_RE = /\b(what|how|which|why|who|when|where)\b/i;
+// verb-question needs a pronoun after it — "do you…" is a question, "we are a bakery" is an answer
+const VERB_Q_RE = /\b(is|are|do|does|did|can|could|should)\s+(you|it|this|that|there)\b/i;
 
 export function kbAnswer(text: string): string | null {
   let best: { score: number; answer: string } | null = null;
@@ -126,14 +128,16 @@ export function kbAnswer(text: string): string | null {
 }
 
 // Route to answering only when it really is a question or request — short
-// flow answers like "vaibhav" belong to the lead form, but "write a code for
-// fibonacci series" must be answered (and deflected), never recorded as a name.
+// flow answers like "vaibhav" belong to the lead form, but "what are the
+// project you build" or "write a code for fibonacci" must be answered.
 export function isQuestion(text: string): boolean {
   if (text.includes("?")) return true;
+  if (text.length > 60) return true;
   if (GREETING_RE.test(text)) return true;
   if (REQUEST_RE.test(text)) return true;
-  if (text.length > 60) return true;
-  return QUESTION_RE.test(text) && kbAnswer(text) !== null;
+  if (WH_RE.test(text)) return true;
+  if (VERB_Q_RE.test(text)) return true;
+  return false;
 }
 
 export const GREETING =
