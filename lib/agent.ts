@@ -101,6 +101,41 @@ const kb: { keys: string[]; answer: string }[] = [
     answer:
       "Hey! I'm the WebKraft agent. I can answer questions about services, pricing and timelines — and I'll grab a few details so the team can send you a fixed quote.",
   },
+  {
+    keys: ["tech", "stack", "technology", "framework", "frameworks", "nextjs", "react", "next.js", "tools"],
+    answer:
+      "We build with Next.js, React, TypeScript and Tailwind CSS on the frontend; Node.js and Supabase for backend, databases and auth; AI features via modern LLMs. Sites deploy on GitHub Pages or Vercel with HTTPS and CDN — fast, secure, cheap to run.",
+  },
+  {
+    keys: ["projects", "portfolio", "examples", "clients", "case", "studies", "demos"],
+    answer:
+      "Our builds span business websites, booking engines, full-stack CRMs, B2B e-commerce and AI agents for WhatsApp/Telegram. Live project links and demos are shared on the consultation call — drop your email in the flow and we'll send them with your quote.",
+  },
+  {
+    keys: ["hosting", "host", "deploy", "deployment", "server", "uptime"],
+    answer:
+      "Static sites ship on GitHub Pages or Vercel's free tier — zero hosting cost for most clients. Apps and data live on Supabase. You get HTTPS, global CDN and 99.9% uptime by default.",
+  },
+  {
+    keys: ["who", "about", "company", "webkraft", "team"],
+    answer:
+      "WebKraft is a small software lab — design, development and AI under one roof. We take a limited number of fixed-scope projects so every build gets senior attention. Fixed quote in 48 hours.",
+  },
+  {
+    keys: ["where", "location", "based", "city", "remote", "india"],
+    answer:
+      "We're remote-first and work with clients across India — Kota, Mumbai, Delhi, Bengaluru and beyond. Everything from brief to launch happens online; calls on Meet or WhatsApp.",
+  },
+  {
+    keys: ["process", "steps", "workflow", "how does it work"],
+    answer:
+      "Simple: 1) tell us what you need here, 2) we reply within 48h with a fixed quote and timeline, 3) 50% advance starts the build with weekly previews, 4) you approve, we launch, 5) 30 days of free post-launch support.",
+  },
+  {
+    keys: ["revision", "revisions", "changes", "edits", "guarantee", "refund"],
+    answer:
+      "Quotes include two revision rounds per stage. If we miss an agreed deadline, you get 10% off — that's the WebKraft guarantee.",
+  },
 ];
 
 // word-boundary match — "vaibhav" must NOT match the key "ai"
@@ -110,12 +145,19 @@ const keyRes = new Map(
 );
 
 const GREETING_RE = /\b(hello|hi+|hey|namaste|yo|hola|good\s(morning|afternoon|evening))\b/i;
-// imperative requests — must go to the AI (which deflects), never into the lead form
-const REQUEST_RE =
-  /\b(write|sing|code|coding|program|script|debug|song|poem|joke|story|recipe|solve|calculate|translate|draw|paint|essay|summari[sz]e|make me|give me|tell me a)\b/i;
 const WH_RE = /\b(what|how|which|why|who|when|where)\b/i;
 // verb-question needs a pronoun after it — "do you…" is a question, "we are a bakery" is an answer
-const VERB_Q_RE = /\b(is|are|do|does|did|can|could|should)\s+(you|it|this|that|there)\b/i;
+const VERB_Q_RE = /\b(is|are|do|does|did|can|could|should)\s+(you|u|ya)\b/i;
+// imperative requests — must go to the AI (which answers or deflects), never into the lead form
+const REQUEST_RE =
+  /\b(write|sing|code|coding|program|script|debug|song|poem|joke|story|recipe|solve|calculate|translate|draw|paint|essay|summari[sz]e|make me|give me|tell me a|provide me|show me|send me|portfolio|past work|previous work|case stud)\b/i;
+// "can you name some…", "could u share…" — any ask phrased at us
+const ASK_RE = /\b(can|could|would|will|please)\b[^.?!]{0,50}\b(you|u)\b/i;
+
+// normalise common typos so intent detection survives them
+function normalize(text: string): string {
+  return text.replace(/\b(ypu|yuo|yoiu)\b/gi, "you").replace(/\bu\b/g, "you");
+}
 
 export function kbAnswer(text: string): string | null {
   let best: { score: number; answer: string } | null = null;
@@ -128,15 +170,17 @@ export function kbAnswer(text: string): string | null {
 }
 
 // Route to answering only when it really is a question or request — short
-// flow answers like "vaibhav" belong to the lead form, but "what are the
-// project you build" or "write a code for fibonacci" must be answered.
-export function isQuestion(text: string): boolean {
-  if (text.includes("?")) return true;
-  if (text.length > 60) return true;
-  if (GREETING_RE.test(text)) return true;
-  if (REQUEST_RE.test(text)) return true;
-  if (WH_RE.test(text)) return true;
-  if (VERB_Q_RE.test(text)) return true;
+// flow answers like "vaibhav" belong to the lead form. Stage-aware length
+// guard: need-answers can be long descriptions; names/budgets never are.
+export function isQuestion(text: string, stage: Stage): boolean {
+  const t = normalize(text.trim());
+  if (t.includes("?")) return true;
+  if (GREETING_RE.test(t)) return true;
+  if (WH_RE.test(t) || VERB_Q_RE.test(t) || REQUEST_RE.test(t) || ASK_RE.test(t)) return true;
+  if (stage !== "need" && stage !== "done") {
+    const max: Record<string, number> = { name: 45, business: 55, budget: 25, contact: 60 };
+    return t.length > (max[stage] ?? 45);
+  }
   return false;
 }
 

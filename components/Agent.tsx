@@ -74,7 +74,7 @@ export function Agent() {
     setTyping(true);
 
     // free-form question → KB first (instant), Nemotron as fallback
-    if (stage === "done" || isQuestion(text)) {
+    if (stage === "done" || isQuestion(text, stage)) {
       const kb = kbAnswer(text);
       const llm = kb ? null : await askLlm([...history, { role: "user", text }]);
       const answer =
