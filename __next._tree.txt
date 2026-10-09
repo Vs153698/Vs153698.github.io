@@ -1,0 +1,4 @@
+:HL["/_next/static/chunks/1ancy_y3ec1b2.css","style"]
+:HL["/_next/static/media/0c89a48fa5027cee-s.p.2cyn07wtgehh0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"jpJ2IosHchea9jrSYQdY4","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
